@@ -76,9 +76,9 @@ export function drawCertificate(
   const c = canvas.getContext('2d')!;
 
   // Background
-  c.fillStyle = '#0d0d0d';
+  c.fillStyle = '#ffffff';
   c.fillRect(0, 0, W, H);
-  c.fillStyle = '#141414';
+  c.fillStyle = '#ffffff';
   c.fillRect(30, 30, W - 60, H - 60);
 
   // Corners
@@ -109,7 +109,7 @@ export function drawCertificate(
 
   // décernée à
   c.font = `400 32px "Open Sans", Arial, sans-serif`;
-  c.fillStyle = '#cccccc';
+  c.fillStyle = '#333333';
   c.fillText('décernée à', W / 2, 408);
 
   // Separator 2
@@ -126,14 +126,14 @@ export function drawCertificate(
     fontSize -= 2;
     c.font = `900 ${fontSize}px Montserrat, "Arial Black", sans-serif`;
   }
-  c.fillStyle = '#ffffff';
+  c.fillStyle = '#111111';
   c.textBaseline = 'middle';
   c.fillText(displayName, W / 2, 524);
 
   // Body text
   c.textBaseline = 'top';
   c.font = `400 27px "Open Sans", Arial, sans-serif`;
-  c.fillStyle = '#bbbbbb';
+  c.fillStyle = '#2a2a2a';
   const lines = [
     'En reconnaissance de sa participation et de la validation des compétences',
     'pratiques et théoriques lors de la formation, dispensée par Loïc Rémy YAO,',
@@ -141,56 +141,36 @@ export function drawCertificate(
   lines.forEach((line, i) => c.fillText(line, W / 2, 596 + i * 44));
 
   c.font = `700 27px "Open Sans", Arial, sans-serif`;
-  c.fillStyle = '#ffffff';
+  c.fillStyle = '#111111';
   c.fillText('CEO de LOIC RÉMY TRADING ACADEMIE.', W / 2, 596 + 2 * 44);
 
   c.font = `400 27px "Open Sans", Arial, sans-serif`;
-  c.fillStyle = '#bbbbbb';
+  c.fillStyle = '#2a2a2a';
   c.fillText("Cette formation lui a permis d'acquérir les connaissances essentielles pour évoluer", W / 2, 596 + 3.8 * 44);
   c.fillText('sur les marchés financiers avec méthode, rigueur et discipline.', W / 2, 596 + 4.8 * 44);
 
   // Date
   const dateStr = `Fait à ${city || 'Abidjan'}, le ${formatDate(date)}.`;
   c.font = `400 28px "Open Sans", Arial, sans-serif`;
-  c.fillStyle = '#cccccc';
+  c.fillStyle = '#222222';
   c.textAlign = 'right';
   c.fillText(dateStr, W - 115, 878);
 
-  // Signature image — drawn BEFORE left text so it overlaps naturally
+  // Signature image — dark pixels stay dark (no inversion needed on white bg)
   if (sigImg && sigImg.complete && sigImg.naturalWidth > 0) {
-    // Render sig to temp canvas with color inversion for dark background
-    const tmp = document.createElement('canvas');
-    tmp.width = sigImg.naturalWidth;
-    tmp.height = sigImg.naturalHeight;
-    const tc = tmp.getContext('2d')!;
-    tc.drawImage(sigImg, 0, 0);
-    const imageData = tc.getImageData(0, 0, tmp.width, tmp.height);
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-      const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-      if (avg < 160) {
-        // Dark pixel → white
-        data[i] = 255; data[i + 1] = 255; data[i + 2] = 255;
-      } else {
-        // Light pixel → transparent
-        data[i + 3] = 0;
-      }
-    }
-    tc.putImageData(imageData, 0, 0);
-
     const sw = 310;
     const sh = Math.round(sw * sigImg.naturalHeight / sigImg.naturalWidth);
-    const sigX = W - 115 - sw; // right-aligned with date
-    c.drawImage(tmp, sigX, 900, sw, sh);
+    const sigX = W - 115 - sw;
+    c.drawImage(sigImg, sigX, 900, sw, sh);
   }
 
   // Left: Loïc REMY info
   c.textAlign = 'left';
   c.font = `700 28px Montserrat, Arial, sans-serif`;
-  c.fillStyle = '#ffffff';
+  c.fillStyle = '#111111';
   c.fillText('Loïc REMY', 112, 948);
   c.font = `400 23px "Open Sans", Arial, sans-serif`;
-  c.fillStyle = '#999999';
+  c.fillStyle = '#555555';
   c.fillText('Formateur / Trader indépendant', 112, 984);
   c.fillText('CEO de Loïc Rémy Trading Académie', 112, 1014);
 }

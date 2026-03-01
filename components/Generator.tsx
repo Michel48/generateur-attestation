@@ -24,7 +24,15 @@ export default function Generator() {
 
   const [defaultCivilite, setDefaultCivilite] = useState('M.');
   const [city, setCity] = useState('Abidjan');
-  const [date, setDate] = useState('2025-06-09');
+  const getLocalDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Janvier est 0
+    const day = String(today.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  };
+  const [date, setDate] = useState(getLocalDate());
   const [tab, setTab] = useState<'manual' | 'csv'>('manual');
   const [manualText, setManualText] = useState('');
   const [csvRows, setCsvRows] = useState<ApprenantRow[]>([]);
