@@ -160,8 +160,8 @@ export function drawCertificate(
   if (sigImg && sigImg.complete && sigImg.naturalWidth > 0) {
     const sw = 310;
     const sh = Math.round(sw * sigImg.naturalHeight / sigImg.naturalWidth);
-    const sigX = W - 115 - sw;
-    c.drawImage(sigImg, sigX, 900, sw, sh);
+    const sigX = W - 150 - sw;
+    c.drawImage(sigImg, sigX, 940, sw, sh);
   }
 
   // Left: Loïc REMY info
