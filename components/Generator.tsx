@@ -196,9 +196,9 @@ export default function Generator() {
                 <option value="Mme">Mme</option>
                 <option value="">Aucune</option>
               </select>
-              <p className="text-xs mt-1" style={{ color: '#4b5563' }}>
+                   {/* PANEL 1  <p className="text-xs mt-1" style={{ color: '#4b5563' }}>
                 Utilisée en saisie manuelle. En Excel, la colonne &quot;Civilité&quot; prime.
-              </p>
+              </p>*/}
             </Field>
             <Field label="Date">
               <input type="date" value={date} onChange={e => setDate(e.target.value)}
