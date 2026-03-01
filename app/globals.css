@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0d0d0d;
+  color: #ffffff;
+  font-family: var(--font-opensans), 'Open Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #141414; }
+::-webkit-scrollbar-thumb { background: #252d3d; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #e53935; }
+
+/* Canvas preview responsive */
+#preview-canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.8);
+}
