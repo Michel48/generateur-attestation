@@ -86,7 +86,7 @@ export function drawCertificate(
 
   // Logo
   if (logoImg && logoImg.complete && logoImg.naturalWidth > 0) {
-    const lw = 170, lh = 170;
+    const lw = 250, lh = 250;
     c.drawImage(logoImg, W / 2 - lw / 2, 36, lw, lh);
   }
 
